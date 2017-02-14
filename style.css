@@ -1,0 +1,41 @@
+body {
+    background-color: moccasin;
+}
+
+header {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+header img {
+    width: 50%;
+    height: auto;
+}
+
+nav {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: salmon;
+    border-radius: 50px;
+    font-size: larger;
+}
+
+nav li {
+    display: inline;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 20px;
+}
+div {
+  width: 1100px;
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: darksalmon;
+  border-radius: 50px;
+
+}
