@@ -1,24 +1,22 @@
 'use strict';
 
-var headRow = document.getElementById('times');
+var headRow = document.getElementById('table');
+var times = document.createElement('thead');
+headRow.appendChild(times);
 var hours = [
   '', '6am', '7am', '8am',
   '9am', '10am', '11am',
   '12pm', '1pm', '2pm',
   '3pm', '4pm', '5pm',
-  '6pm', '7pm', '8pm'];
+  '6pm', '7pm', '8pm', 'total'];
 
 for(var i = 0; i < hours.length; i++) {
-  var time = document.createElement('th');
-  time.textContent = hours[i];
-  headRow.appendChild(time);
+  var hour = document.createElement('th');
+  hour.textContent = hours[i];
+  times.appendChild(hour);
 }
-time = document.createElement('th');
-time.textContent = 'total';
-headRow.appendChild(time);
 
-
-function Store(name, min, max, avg, order) {
+function Store(name, min, max, avg) {
   this.location = name;
   this.minCustomers = min;
   this.maxCustomers = max;
@@ -31,7 +29,6 @@ function Store(name, min, max, avg, order) {
     '6pm', '7pm', '8pm'];
   this.cookiesSold = [];
   this.total = 0;
-  this.locationOrder = order + '_location';
 }
 
 Store.prototype.customersPerHour = function () {
@@ -45,55 +42,87 @@ Store.prototype.customersPerHour = function () {
 
 Store.prototype.display = function() {
   this.customersPerHour();
-  var locationsCol = document.getElementById(this.locationOrder);
-  var locations = document.createElement('th');
-  locations.textContent = this.location;
-  locationsCol.appendChild(locations);
+  var locationsCol = document.getElementById('table');
+  var newRow = document.createElement('tr');
+  locationsCol.appendChild(newRow);
+  var newTh = document.createElement('th');
+  newTh.id = 'tH';
+  newTh.textContent = this.location;
+  newRow.appendChild(newTh);
   for(var i = 0; i < this.hoursOpen.length; i++) {
     var sold = document.createElement('td');
     sold.textContent = (this.cookiesSold[i]);
-    locationsCol.appendChild(sold);
+    newRow.appendChild(sold);
   }
   for (var j = 0; j < this.cookiesSold.length; j++) {
     this.total += this.cookiesSold[j];
   }
   var storeTotal = document.createElement('td');
   storeTotal.textContent = (this.total);
-  locationsCol.appendChild(storeTotal);
+  newRow.appendChild(storeTotal);
 };
 
-var pike = new Store('1st and Pike', 23, 65, 6.3, 'first');
+var pike = new Store('1st and Pike', 23, 65, 6.3);
 pike.display();
 
-var airport = new Store('SeaTac Airport', 3, 24, 1.2, 'second');
+var airport = new Store('SeaTac Airport', 3, 24, 1.2);
 airport.display();
 
-var center = new Store('Seattle Center', 11, 38, 3.7, 'third');
+var center = new Store('Seattle Center', 11, 38, 3.7);
 center.display();
 
-var capitol = new Store('Capitol Hill', 20, 38, 2.3, 'fourth');
+var capitol = new Store('Capitol Hill', 20, 38, 2.3);
 capitol.display();
 
-var alki = new Store('Alki', 2, 16, 4.6, 'fifth');
+var alki = new Store('Alki', 2, 16, 4.6);
 alki.display();
 
-var storeArray = [pike, airport, center, capitol, alki];
-var cookiesPerStore = [];
 
+var newStore = document.getElementById('form');
+
+newStore.addEventListener('submit', submitHandler);
+
+var addedStore = '';
+
+function submitHandler(event) {
+  event.preventDefault();
+  var store = event.target.store_name.value;
+  var minimum = parseInt(event.target.min_customers.value);
+  var maximum = parseInt(event.target.max_customers.value);
+  var average = parseInt(event.target.avg_cookies.value);
+  if (isNaN(minimum) || isNaN(maximum) || isNaN(average)) {
+    alert('Please enter NUMBERS ONLY in fields other than "Store Name"');
+  } else {
+    console.log(store, minimum, maximum, average);
+    addedStore = new Store(store, minimum, maximum, average);
+    console.log(addedStore);
+    addedStore.display();
+  }
+}
+
+
+
+
+// var storeArray = [pike, airport, center, capitol, alki];
+// var cookiesPerStore = [];
 
 
 /*hourly totals atempt below here*/
 
-// var hourTotals = function () {
+// var hourTotals = function (num) {
 //   for (var i = 0; i < storeArray.length; i++) {
 //     var currentStore = storeArray[i];
-//     for (var j = 0; j < currentStore.cookiesSold.length; j = j + currentStore.hoursOpen.length) {
-//       cookiesPerStore.push(currentStore.cookiesSold[j]);
+//     var sum = 0;
+//     for (var j = num; j < currentStore.cookiesSold.length; j = j + currentStore.hoursOpen.length) {
+//       sum += (currentStore.cookiesSold[j]);
 //     }
 //   }
+//   cookiesPerStore.push(sum);
+//   console.log(cookiesPerStore);
 // };
-// hourTotals();
-// console.log(cookiesPerStore);
+// hourTotals(0);
+// hourTotals(1);
+
 
 
 

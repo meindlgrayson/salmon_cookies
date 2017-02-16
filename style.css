@@ -1,5 +1,6 @@
 body {
     background-color: moccasin;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 header {
@@ -37,6 +38,7 @@ div {
   margin-right: auto;
   background-color: darksalmon;
   border-radius: 50px;
+  padding: 20px;
 
 }
 table { 
@@ -45,4 +47,36 @@ table {
 
 td, th {
   border: 1px solid black;
+}
+
+nav a:link {
+  text-decoration: none;
+  color: moccasin;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+nav a:visited {
+  text-decoration: none;
+  color: moccasin;
+}
+
+nav a:active {
+  text-decoration: none;
+  color: white;
+}
+
+form p {
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
