@@ -91,7 +91,7 @@ function submitHandler(event) {
   var maximum = parseInt(event.target.max_customers.value);
   var average = parseInt(event.target.avg_cookies.value);
   if (isNaN(minimum) || isNaN(maximum) || isNaN(average)) {
-    alert('Please enter NUMBERS ONLY in fields other than "Store Name"');
+    alert('Please enter NUMBERS ONLY in fields other than "Store Name" - asshole');
   } else {
     console.log(store, minimum, maximum, average);
     addedStore = new Store(store, minimum, maximum, average);
